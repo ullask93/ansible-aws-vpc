@@ -100,7 +100,7 @@
           Name: Tier_igw
       register: igw_out
     
-    - name: setup public subnet route table
+    - name: setup public subnet routetable
       ec2_vpc_route_table:
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
@@ -112,6 +112,5 @@
           - "{{pubsub3_out.subnet.id}}"
         routes:
           - dest: 0.0.0.0/0
-            gateway_id: "{{igw_out.gateway.id}}"
+            gateway_id: "{{igw_out.gateway_id}}"
       register: pubRT_out
-      

@@ -52,5 +52,5 @@
         cidr: "{{PubSub3Cidr}}"
         map_public: yes
         resource_tags:
-          Name: Tier-pubsub1
+          Name: Tier-pubsub3
       register: pubsub3_out

@@ -4,4 +4,23 @@
   gather_facts: False
   tasks:
     - name: Import VPC variables
-      include_vars: vars/vpc_output_vars
+      include_vars: vars/output_vars
+
+    - name: Import stack variables
+      include_vars: vars/stack-setup
+
+    - name: Create ec2 key
+      ec2_key:
+        name: profile-key
+        region: "{{region}}"
+      register: key_out
+
+    - name: Save private key into file loginkey.pem
+      copy:
+        content: "{{key_out.key.private_key}}"
+        dest: "./loginkey.pem"
+        mode: 0600
+      when: key_out.changed
+    
+    
+
